@@ -14,5 +14,9 @@ def render_colors():
 @app.route("/signup")
 def render_signup():
     return render_template("signup.html")
+    
+@app.route("/<name>")
+def hello_someone(name):
+    return render_template("hello.html", name=name.title())
 
 app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
