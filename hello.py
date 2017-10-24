@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask("MyApp")
 
@@ -11,12 +11,14 @@ def hello():
 def render_colors():
     return render_template("colors.html")
 
-@app.route("/signup")
-def render_signup():
-    return render_template("signup.html")
-    
 @app.route("/<name>")
 def hello_someone(name):
     return render_template("hello.html", name=name.title())
+
+@app.route("/signup", methods=["POST"])
+def sign_up():
+    form_data = request.form
+    print form_data["email"]
+    return "All OK"
 
 app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
