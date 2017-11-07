@@ -26,7 +26,7 @@ def sign_up():
 def send_simple_message():
     response = requests.post(
         "https://api.mailgun.net/v3/sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org/messages",
-        auth=("api", "key-36937666dd1e5f53438a11d957ec83a9"),
+        auth=("api", "key-#######"),
         data={"from": "Excited User <mailgun@sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org>",
               "to": ["c14314736@mydit.ie"],
               "subject": "Hello",
