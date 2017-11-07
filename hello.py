@@ -12,25 +12,25 @@ def hello():
 def render_colors():
     return render_template("colors.html")
 
-# @app.route("/<name>")
-# def hello_someone(name):
-#     return render_template("hello.html", name=name.title())
+@app.route("/<name>")
+def hello_someone(name):
+    return render_template("hello.html", name=name.title())
 
 @app.route("/signup", methods=["POST"])
 def sign_up():
     form_data = request.form
     print form_data["email"]
-    return "All OK"
-
-@app.route("/sendmessage")    
-def send_simple_message():
+    user_email = form_data["email"]
+    text_email =form_data["text"]
+    
     response = requests.post(
         "https://api.mailgun.net/v3/sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org/messages",
         auth=("api", "key-36937666dd1e5f53438a11d957ec83a9"),
         data={"from": "Excited User <mailgun@sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org>",
-              "to": ["c14314736@mydit.ie"],
+              "to": user_email,
               "subject": "Hello",
-              "text": "Testing some Mailgun awesomness!"})
+              "text": text_email})
     return response.text
+
 
 app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
