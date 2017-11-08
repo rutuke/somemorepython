@@ -4,33 +4,34 @@ import requests
 
 app = Flask("MyApp")
 
-# @app.route("/")
-# def hello():
-#     return "Hello World, This is Ruta"
 
-# @app.route("/colors")
-# def render_colors():
-#     return render_template("colors.html")
+@app.route("/")
+def hello():
+    return "Hello World, This is Ruta"
 
-# @app.route("/<name>")
-# def hello_someone(name):
-#     return render_template("hello.html", name=name.title())
+@app.route("/colors")
+def render_colors():
+    return render_template("colors.html")
 
-# @app.route("/signup", methods=["POST"])
-# def sign_up():
-#     form_data = request.form
-#     print form_data["email"]
-#     user_email = form_data["email"]
-#     text_email =form_data["text"]
+@app.route("/<name>")
+def hello_someone(name):
+    return render_template("hello.html", name=name.title())
+
+@app.route("/signup", methods=["POST"])
+def sign_up():
+    form_data = request.form
+    print form_data["email"]
+    user_email = form_data["email"]
+    text_email =form_data["text"]
     
-#     response = requests.post(
-#         "https://api.mailgun.net/v3/sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org/messages",
-#         auth=("api", "key-#######"),
-#         data={"from": "Excited User <mailgun@sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org>",
-#               "to": user_email,
-#               "subject": "Hello",
-#               "text": text_email})
-#     return response.text
+    response = requests.post(
+        "https://api.mailgun.net/v3/sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org/messages",
+        auth=("api", "key-#######"),
+        data={"from": "Excited User <mailgun@sandbox8532e1b21f364fc98df62c333450a10b.mailgun.org>",
+              "to": user_email,
+              "subject": "Hello",
+              "text": text_email})
+    return response.text
 
 @app.route("/weather")
 def get_weather():
@@ -45,6 +46,7 @@ def get_weather():
     print(response.status_code)
     print(response.headers["content-type"])
     print(response.text)
+    
     
     temperature = data["main"]["temp"]
     name = data["name"]
